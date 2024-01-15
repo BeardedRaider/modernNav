@@ -54,8 +54,27 @@ border-radius: 100vw 0 0 100vw;
 
 
 .nav-list li.active {
+    view-transition-name: activeNavTab;/*this is the name of the transition chrome canary only*/
     background: var(--body-bg);
     position: relative;
+}
+
+/*would normally be done in JS*/
+.nav-list li:nth-child(1) a {
+    view-transition-name: navLink-1;
+}
+
+.nav-list li:nth-child(2) a {
+    view-transition-name: navLink-2;
+}
+
+.nav-list li:nth-child(3) a {
+    view-transition-name: navLink-3;
+}
+
+
+::view-transition-group(activeNavTab) {
+    animation-duration: .5s;
 }
 
 .nav-list li.active::before,
@@ -84,5 +103,8 @@ border-radius: 100vw 0 0 100vw;
 
 .nav-list a {
     color: white;
+    display: block;
+    position: relative;/*to make sure the ::before and ::after are relative to the a tag*/
+    z-index: 10; /*to make sure the text is on top of the ::before and ::after*/
     text-decoration: none;
 }
